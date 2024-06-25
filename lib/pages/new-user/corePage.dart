@@ -104,34 +104,70 @@ class _NewsListState extends State<NewsList> {
           );
         } else {
           final List<dynamic> articles = snapshot.data ?? [];
-          return ListView.builder(
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              childAspectRatio: 0.75,
+            ),
             itemCount: articles.length,
             itemBuilder: (context, index) {
               final article = articles[index];
-              return ListTile(
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 8),
-                    Text(
-                      article['name'] ?? 'No Title',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+              return Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: Card(
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(12)),
+                        child: article['image'] != null
+                            ? Image.network(
+                                article['image'],
+                                width: double.infinity,
+                                height: 150,
+                                fit: BoxFit.cover,
+                              )
+                            : Container(
+                                width: double.infinity,
+                                height: 120,
+                                color: Colors.grey[300],
+                                child: const Icon(Icons.image,
+                                    size: 50, color: Colors.grey),
+                              ),
                       ),
-                    ),
-                    if (article['image'] != null)
-                      Container(
-                        width: double.infinity,
-                        height: 200,
-                        child: Image.network(
-                          article['image'],
-                          fit: BoxFit.cover,
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              article['name'] ?? 'No Title',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              article['amiiboSeries'] ?? 'No Description',
+                              style: TextStyle(fontSize: 14),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
                         ),
                       ),
-                    const SizedBox(height: 4),
-                    Text(article['amiiboSeries'] ?? 'No Description'),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },
