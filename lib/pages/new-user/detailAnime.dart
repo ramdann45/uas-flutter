@@ -25,7 +25,7 @@ class DetailAnime extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           article['name'] ?? 'Detail Profil',
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color.fromARGB(255, 32, 35, 38),
         iconTheme: const IconThemeData(color: Colors.white),
@@ -53,7 +53,8 @@ class DetailAnime extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(12)),
                   child: article['image'] != null
                       ? Image.network(
                           article['image'],

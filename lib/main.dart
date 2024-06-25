@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:learn_1/pages/new-user/corePage.dart';
 import 'package:learn_1/pages/new-user/firstPage.dart';
 
 void main() {
@@ -17,13 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.cyan,
       ),
       debugShowCheckedModeBanner: false,
-      home: CorePage(
-        address: '',
-        email: '',
-        gender: '',
-        name: '',
-        phone: '',
-      ),
+      home: const FirstPage(),
     );
   }
 }
